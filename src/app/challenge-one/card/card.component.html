@@ -1,0 +1,110 @@
+<style>
+  .card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    max-height: 104px;
+    margin: 10px 0;
+  }
+
+  .item-card {
+    max-width: 330px;
+    margin: 1em;
+  }
+
+  .mat-card {
+    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    display: block;
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+.card-content {
+  height: 250px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card-subtitle {
+  color: rgba(0,0,0,.54);
+  font-size: 16px;
+}
+
+.button button {
+  width: 100%;
+  
+}
+
+.items-cart {
+  width: 100%;
+  margin: 20px 10px;
+}
+
+.items-cart-list, .cart-name {
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+h4 {
+  font-weight: 300;
+}
+
+.right-button {
+  text-align: right;
+}
+
+.right-button button {
+  padding: 5px 10px;
+}
+
+
+</style>
+<div class="card-wrapper">
+    <div class="item-card mat-card card" *ngFor="let i of data">
+      <div class="card-header">
+        <div class="card-header-text">
+          <p class="card-title">{{i.title}}</p>
+          <span class="card-subtitle">Price: {{i.price}} </span>
+        </div>
+        <div class="img-wrapper">
+          <img src={{i.img}} alt="">
+        </div>
+        <div class="card-content">
+          <p>{{i.description}}
+          </p>
+        </div>
+        <div class="right-button card-action">
+          <button class="btn-primary" (click)="addToCart(i)" ><i class="fas fa-cart-plus"></i>Add to cart</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="container">
+  <div class="items-cart">
+      <h3>Add to cart:</h3>
+      <div class="cart-name" *ngFor="let i of cards">
+          <div class="names"><h4>{{i.name}}</h4></div>
+          <div class="prices"><h4>{{i.price}}</h4></div>
+      </div>
+      <div class="items-cart-list">
+        <h3 class="cart-item-name">Total: </h3>
+        <h3>{{total}}</h3>
+      </div>
+      <div class="button">
+        <button class="btn-primary" (click)="buy()">Buy</button>
+      </div>
+      <div class="alert">
+          <p class="alert-messages">{{messages}}</p>
+      </div>
+  </div>
+</div>
