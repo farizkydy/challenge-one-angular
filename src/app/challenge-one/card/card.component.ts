@@ -13,19 +13,26 @@ export class CardComponent implements OnInit {
   total = 0
   messages = ""
   change = ""
-  constructor() {
-    
-   }
+  constructor() {}
 
   ngOnInit(): void {
   }
   addToCart(item: any) {
-    this.cards.push({
-      name: item.title,
-      price: item.price,
-    })
-    this.total = this.total + item.price
-    
+    if (this.cards.some((el, i) => el.name===item.title)) {
+
+      var index = this.cards.map(function(e) { return e.name; }).indexOf(item.title);
+      this.cards.splice(index, 1)
+      this.total = this.total - item.price
+   
+    } else if (this.cards.some((el, i) => el.name!=item.title)){
+
+      this.cards.push({
+        name: item.title,
+        price: item.price,
+      })
+
+      this.total = this.total + item.price
+    }
   }
 
   buy() {
@@ -35,6 +42,5 @@ export class CardComponent implements OnInit {
       this.messages = "transaction success"
     }
   }
-
 
 }

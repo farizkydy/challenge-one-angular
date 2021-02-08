@@ -18,93 +18,131 @@
   }
 
   .mat-card {
-    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     display: block;
     position: relative;
     padding: 16px;
     border-radius: 4px;
-}
+  }
 
-.card-content {
-  height: 250px;
-}
+  .card-content {
+    height: 250px;
+  }
 
-.card-title {
-  font-size: 24px;
-  font-weight: bold;
-}
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
 
-.card-subtitle {
-  color: rgba(0,0,0,.54);
-  font-size: 16px;
-}
+  .card-subtitle {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 16px;
+  }
 
-.button button {
-  width: 100%;
-  
-}
+  .button button {
+    width: 100%;
+  }
 
-.items-cart {
-  width: 100%;
-  margin: 20px 10px;
-}
+  .items-cart {
+    width: 100%;
+    margin: 20px 10px;
+  }
 
-.items-cart-list, .cart-name {
-  display: flex;
-  justify-content: space-between;
- 
-}
+  .items-cart-list,
+  .cart-name {
+    display: flex;
+    justify-content: space-between;
+  }
 
-h4 {
-  font-weight: 300;
-}
+  h4 {
+    font-weight: 300;
+  }
 
-.right-button {
-  text-align: right;
-}
+  .right-button {
+    text-align: right;
+  }
 
-.right-button button {
-  padding: 5px 10px;
-}
+  .right-button button {
+    padding: 5px 10px;
+  }
 
-
+  .right-button button:link {
+    background-color: black;
+  }
 </style>
 <div class="card-wrapper">
-    <div class="item-card mat-card card" *ngFor="let i of data">
-      <div class="card-header">
-        <div class="card-header-text">
-          <p class="card-title">{{i.title}}</p>
-          <span class="card-subtitle">Price: {{i.price}} </span>
-        </div>
-        <div class="img-wrapper">
-          <img src={{i.img}} alt="">
-        </div>
-        <div class="card-content">
-          <p>{{i.description}}
-          </p>
-        </div>
-        <div class="right-button card-action">
-          <button class="btn-primary" (click)="addToCart(i)" ><i class="fas fa-cart-plus"></i>Add to cart</button>
-        </div>
+  <div class="item-card mat-card card" *ngFor="let i of data">
+    <div class="card-header">
+      <div class="card-header-text">
+        <p class="card-title">{{ i.title }}</p>
+        <span class="card-subtitle">Price: {{ i.price }} </span>
+      </div>
+      <div class="img-wrapper">
+        <img src="{{ i.img }}" alt="" />
+      </div>
+      <div class="card-content">
+        <p>{{ i.description }}</p>
+      </div>
+      <div class="right-button card-action">
+        <button
+          class="btn-primary"
+          (click)="addToCart(i)"
+          ng-click="chngcolor()"
+          ng-style="color"
+        >
+          <i class="fas fa-cart-plus"></i>Add to cart
+        </button>
       </div>
     </div>
+  </div>
 </div>
 <div class="container">
   <div class="items-cart">
-      <h3>Add to cart:</h3>
-      <div class="cart-name" *ngFor="let i of cards">
-          <div class="names"><h4>{{i.name}}</h4></div>
-          <div class="prices"><h4>{{i.price}}</h4></div>
+    <h3>Add to cart:</h3>
+    <div class="cart-name" *ngFor="let i of cards">
+      <div class="names">
+        <h4>{{ i.name }}</h4>
       </div>
-      <div class="items-cart-list">
-        <h3 class="cart-item-name">Total: </h3>
-        <h3>{{total}}</h3>
+      <div class="prices">
+        <h4>{{ i.price }}</h4>
       </div>
-      <div class="button">
-        <button class="btn-primary" (click)="buy()">Buy</button>
-      </div>
-      <div class="alert">
-          <p class="alert-messages">{{messages}}</p>
-      </div>
+    </div>
+    <div class="items-cart-list">
+      <h3 class="cart-item-name">Total:</h3>
+      <h3>{{ total }}</h3>
+    </div>
+    <div class="button">
+      <button class="btn-primary" (click)="buy()">Buy</button>
+    </div>
+    <div class="alert">
+      <p class="alert-messages">{{ messages }}</p>
+    </div>
   </div>
 </div>
+<script>
+  // Initialise Angular
+  var app = angular.module("app", []);
+
+  // Main Controller
+  app.controller("MainController", [
+    "$scope",
+    function ($scope) {
+      // set default color
+      $scope.color = {
+        "background-color": "green",
+      };
+
+      $scope.chngcolor = function () {
+        $scope.color = {
+          "background-color": "red",
+        };
+      };
+
+      $scope.chcolor = function () {
+        $scope.color = {
+          "background-color": "green",
+        };
+      };
+    },
+  ]);
+</script>
